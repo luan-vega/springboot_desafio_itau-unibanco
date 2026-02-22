@@ -1,10 +1,10 @@
 package desafio.itau.springboot.service;
 
+import org.junit.jupiter.api.Test;
 import desafio.itau_unibanco.springboot.model.Transaction;
 import desafio.itau_unibanco.springboot.service.TransactionService;
-import org.junit.jupiter.api.Test;
-
 import java.time.OffsetDateTime;
+import java.util.DoubleSummaryStatistics;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,7 +28,7 @@ class TransactionServiceTest {
         transactionService.addTransaction(new Transaction(200.0, now.minusSeconds(30)));
         transactionService.addTransaction(new Transaction(300.0, now.minusSeconds(70)));
 
-        var statistics = transactionService.getStatistcs();
+        DoubleSummaryStatistics statistics = transactionService.getStatistcs();
 
         assertEquals(2, statistics.getCount());
         assertEquals(150.0, statistics.getAverage());
@@ -42,7 +42,7 @@ class TransactionServiceTest {
         transactionService.addTransaction(new Transaction(100.0, OffsetDateTime.now()));
         transactionService.clearTransactions();
 
-        var statistics = transactionService.getStatistcs();
+        DoubleSummaryStatistics statistics = transactionService.getStatistcs();
 
         assertEquals(0, statistics.getCount());
     }
@@ -54,7 +54,7 @@ class TransactionServiceTest {
 
         Transaction invalidTransaction = new Transaction(100.0, now.plusSeconds(-100));
         transactionService.addTransaction(invalidTransaction);
-        var statistics = transactionService.getStatistcs();
+        DoubleSummaryStatistics statistics = transactionService.getStatistcs();
 
         assertEquals(0, statistics.getCount());
     }
