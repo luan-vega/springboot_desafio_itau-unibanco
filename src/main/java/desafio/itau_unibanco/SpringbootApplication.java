@@ -1,4 +1,4 @@
-package desafio.itau_unibanco.springboot;
+package desafio.itau_unibanco;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
